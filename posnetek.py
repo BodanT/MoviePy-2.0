@@ -48,53 +48,69 @@ def format_duration(duration):
     hours, mins, secs = duration // 3600, (duration % 3600) // 60, duration % 60
     return f"{hours:02d}:{mins:02d}:{secs:02d}"
 
-def add_title_and_end_screen(video_path, start_title, end_title, output_path):
+def add_title_and_end_screen(video_path, title_of_video, title_of_next_video, output_path):
     title_duration = parse_time("00:00:05.000")
     # Load the video clip
     video_clip = VideoFileClip(video_path)
-    theme="Tema: "  + start_title
-    prof_name = "Prof. Robert Rozman"
+    theme="Naslov: "+title_of_video
+    duration_txt = "Trajanje:"
     duration_str = format_duration(video_clip.duration + title_duration * 2)
-    
+    subtitle="Podnaslov:.......... "
+    lea="LAPSy Embedded Academy"
+    next_video="Naslednji posnetek: "+title_of_next_video
+
+    custom_font="fonts/garamond.ttf"
+
+    end_title= "Hvala za ogled!"
+
+    # TODO:
+    #  Avtomatsko dodajanje naslova, podnaslova, naslova nasljednega posnetka
+    #  Ideja: se doda naslov kot argument v fuknciji in potem bomo videli.....
 
     # Create a text clip with the title for the beginning of the video
-    theme_clip=TextClip(theme, fontsize=70, color='black').set_duration(title_duration).set_position(('center')).set_start(0)
-    professor_clip=TextClip(prof_name, fontsize=35, color='black').set_duration(title_duration).set_position(('left', video_clip.size[1]-85)).set_start(0)
-    duration_clip=TextClip(duration_str, fontsize=35, color='black').set_duration(title_duration).set_position(('left', video_clip.size[1]-50)).set_start(0)
+    theme_clip=TextClip(theme, fontsize=70, color='black', font=custom_font).set_duration(title_duration).set_position(('center')).set_start(0)
+    subtitle_clip=TextClip(subtitle, fontsize=35, color='black', font=custom_font).set_duration(title_duration).set_position(('center', 420)).set_start(0)
+    professor_clip=TextClip(duration_txt, fontsize=35, color='black', font=custom_font).set_duration(title_duration).set_position((5, video_clip.size[1]-85)).set_start(0)
+    duration_clip=TextClip(duration_str, fontsize=35, color='black', font=custom_font).set_duration(title_duration).set_position((10, video_clip.size[1]-50)).set_start(0)
+    lea_clip=TextClip(lea, fontsize=50, color='white', font=custom_font).set_duration(title_duration).set_position(('center', 30)).set_start(0)
+    next_video_clip=TextClip(next_video, fontsize=35, color='black', font=custom_font).set_duration(title_duration).set_position(('center', 420)).set_start(0)
 
     # Create a text clip with the title for the end of the video
-    end_text_clip = TextClip(end_title, fontsize=70, color='black').set_duration(title_duration).set_position('center')
+    end_text_clip = TextClip(end_title, fontsize=70, color='black', font=custom_font).set_duration(title_duration).set_position('center')
 
     # Create a color clip with black background and white text, with a duration of 5 seconds
     color_clip = ColorClip(video_clip.size, color=(255, 255, 255), duration=title_duration)
+    red_lane = ColorClip((video_clip.size[0], 100), color=(180, 22, 44), duration=title_duration).set_position(('center', 0)).set_start(0)
 
     # Create an image clip from the provided image file
-    image_clip = ImageClip("files/fri_logo.png", duration=title_duration)
+    fri_logo_clip = ImageClip("photos/fri_logo.png", duration=title_duration)
+    lea_logo_clip= ImageClip("photos/lea.png", duration=title_duration)
     # Resize the image to a smaller width, maintaining the original aspect ratio
     new_width = 300  # Set the desired width (adjust as needed)
-    image_clip = image_clip.resize(width=new_width)
+    fri_logo_clip = fri_logo_clip.resize(width=new_width)
+    lea_logo_clip= lea_logo_clip.resize(height=100)
+
+    lea_logo_clip = lea_logo_clip.set_position((0,0))
 
     # Calculate the new height to maintain the aspect ratio
-    aspect_ratio = image_clip.size[0] / image_clip.size[1]
+    aspect_ratio = fri_logo_clip.size[0] / fri_logo_clip.size[1]
     new_height = int(new_width / aspect_ratio)
 
     # Calculate the x-position for the right bottom corner
     image_x = video_clip.size[0] - new_width
     image_y = video_clip.size[1] - new_height
-    image_clip = image_clip.set_position((image_x, image_y))
+    fri_logo_clip = fri_logo_clip.set_position((image_x, image_y))
 
     # Overlay the text clip on the color clip
-    start_text_overlay_clip = CompositeVideoClip([color_clip, professor_clip, duration_clip, theme_clip])
-    end_text_overlay_clip = CompositeVideoClip([color_clip, end_text_clip])
-
-    # Overlay the image clip on both start and end screens
-    start_text_overlay_clip = CompositeVideoClip([start_text_overlay_clip, image_clip])
-    end_text_overlay_clip = CompositeVideoClip([end_text_overlay_clip, image_clip])
+    start_text_overlay_clip = CompositeVideoClip([color_clip, red_lane, professor_clip, duration_clip, theme_clip, subtitle_clip, lea_clip, lea_logo_clip, fri_logo_clip])
+    end_text_overlay_clip = CompositeVideoClip([color_clip, red_lane, end_text_clip, fri_logo_clip, lea_logo_clip, next_video_clip, lea_clip])
 
     # Concatenate the video clip with the text clip
     final_clip = concatenate_videoclips([start_text_overlay_clip, video_clip, end_text_overlay_clip])
     # Save the video
     final_clip.write_videofile(output_path, codec='libx264')
+
+
 
 
 def main():
@@ -112,7 +128,7 @@ def main():
     #     text_elements = config.get("text_elements", [])
 
     # add_text_to_video(args.input, text_elements, args.output)
-    add_title_and_end_screen("files/input.mp4", "Hello World", "GoodBye World",  "files/out1.mp4")
+    add_title_and_end_screen("input/input.mp4", "Video 1", "Video 2",  "output/out1.mp4")
     
     
 
