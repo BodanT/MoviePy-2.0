@@ -48,24 +48,22 @@ def format_duration(duration):
     hours, mins, secs = duration // 3600, (duration % 3600) // 60, duration % 60
     return f"{hours:02d}:{mins:02d}:{secs:02d}"
 
-def add_title_and_end_screen(video_path, title_of_video, title_of_next_video, output_path):
+def add_title_and_end_screen(video_path, title_of_video, title_of_next_video, subtitle, output_path):
     title_duration = parse_time("00:00:05.000")
     # Load the video clip
     video_clip = VideoFileClip(video_path)
+
+    # Create/get all the text needed to be added to the clips
     theme="Naslov: "+title_of_video
     duration_txt = "Trajanje:"
     duration_str = format_duration(video_clip.duration + title_duration * 2)
-    subtitle="Podnaslov:.......... "
+    subtitle="Podnaslov: " + subtitle
     lea="LAPSy Embedded Academy"
     next_video="Naslednji posnetek: "+title_of_next_video
+    end_title = "Hvala za ogled!"
 
+    #get the custom font (Right now is the font that the university uses)
     custom_font="fonts/garamond.ttf"
-
-    end_title= "Hvala za ogled!"
-
-    # TODO:
-    #  Avtomatsko dodajanje naslova, podnaslova, naslova nasljednega posnetka
-    #  Ideja: se doda naslov kot argument v fuknciji in potem bomo videli.....
 
     # Create a text clip with the title for the beginning of the video
     theme_clip=TextClip(theme, fontsize=70, color='black', font=custom_font).set_duration(title_duration).set_position(('center')).set_start(0)
@@ -89,7 +87,6 @@ def add_title_and_end_screen(video_path, title_of_video, title_of_next_video, ou
     new_width = 300  # Set the desired width (adjust as needed)
     fri_logo_clip = fri_logo_clip.resize(width=new_width)
     lea_logo_clip= lea_logo_clip.resize(height=100)
-
     lea_logo_clip = lea_logo_clip.set_position((0,0))
 
     # Calculate the new height to maintain the aspect ratio
@@ -111,9 +108,40 @@ def add_title_and_end_screen(video_path, title_of_video, title_of_next_video, ou
     final_clip.write_videofile(output_path, codec='libx264')
 
 
+def edit_all_videos(folder_path, output_path, config_path):
+    # Read the JSON configuration file and remove comments
+    with open(config_path, 'r') as config_file:
+        config_text = remove_comments(config_file.read())
+        config = json.loads(config_text)
+        text_elements = config.get("spica", [])
+
+    #Go through all elements in the config file and edit the videos
+    for element in text_elements:
+        #Get the video name and the text elements
+        video_name = element.get("video_name", "")
+        title_of_video = element.get("title_of_video", "")
+        title_of_next_video = element.get("title_of_next_video", "")
+        subtitle= element.get("subtitle", "")
+
+        #Create the paths to the input and output videos
+        video_path = os.path.join(folder_path, f"{video_name}.mp4")
+        output_video_path = os.path.join(output_path, f"edited_{video_name}.mp4")
+
+        #Check if the video exists and edit it
+        if os.path.exists(video_path):
+            print(f"Editing video: {video_name}")
+            add_title_and_end_screen(video_path, title_of_video, title_of_next_video, subtitle, output_video_path)
+            print(f"Done editing video: {video_name}")
+        else:
+            print(f"Video not found: {video_name}")
+
+
 
 
 def main():
+
+
+    edit_all_videos("input", "output", "spica.json")
 
     # parser = argparse.ArgumentParser(description='Add text to a video using MoviePy')
     # parser.add_argument('-c', '--config', required=True, help='Path to the JSON configuration file')
@@ -127,8 +155,10 @@ def main():
     #     config = json.loads(config_text)
     #     text_elements = config.get("text_elements", [])
 
+
+
     # add_text_to_video(args.input, text_elements, args.output)
-    add_title_and_end_screen("input/input.mp4", "Video 1", "Video 2",  "output/out1.mp4")
+    # add_title_and_end_screen("input/input.mp4", "Video 1", "Video 2",  "output/out1.mp4")
     
     
 

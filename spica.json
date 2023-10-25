@@ -1,0 +1,16 @@
+{
+  "spica": [
+    {
+      "video_name": "input",
+      "title_of_video": "Spica",
+      "subtitle": "The brightest star in the constellation Virgo",
+      "title_of_next_video": "Spica Part 2"
+    },
+    {
+      "video_name": "input2",
+      "title_of_video": "Spica_2",
+      "subtitle": "IDK what to put here",
+      "title_of_next_video": "Spica Part 3"
+    }
+  ]
+}
