@@ -42,7 +42,7 @@ Ta funkcija je odgovorna za izboljšanje posameznega video posnetka. Prejme več
      - `end_title`: Sporočilo, prikazano ob zaključku, npr. "Hvala za ogled!"
 
 4. **Font in style**:
-   - Koda določi prilagojeno pisavo (`custom_font`) in določi velikost pisave, barvo in položaj za vsak besedilni element. Te lastnosti se lahko prilagodijo glede na slog vašega videoposnetka.
+   - Koda določi prilagojeno pisavo (`custom_font`), trenutno **garamond.ttf** in določi velikost pisave, barvo in položaj za vsak besedilni element. Te lastnosti se lahko prilagodijo glede na slog vašega videoposnetka.
 
 5. **Text Clips**:
    - Besedilni posnetki se ustvarijo za vsak besedilni element s pomočjo funkcije `TextClip` iz MoviePy. Vsak besedilni posnetek je nastavljen na določeno trajanje in postavljen na želeno mesto v videu.
