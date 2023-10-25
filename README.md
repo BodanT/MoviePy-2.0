@@ -20,18 +20,18 @@ Ta funkcija je odgovorna za izboljšanje posameznega video posnetka. Prejme več
 #### Predpogoji:
 
 - Da bi ta skript deloval pravilno, morate imeti ustrezno urejen imenik s predhodno določeno strukturo:
-  - Imenik "input": V tem imeniku morajo biti shranjeni vsi videoposnetki, ki jih želite izboljšati.
-  - Imenik "output": V tem imeniku bodo shranjeni urejeni videoposnetki.
-  - Imenik "fonts": Ta imenik naj vsebuje prilagojeno pisavo za besedilne elemente.
-  - Imenik "photos": Ta imenik naj vsebuje slike ali logotipe, ki se bodo uporabili v videoposnetkih.
+  - Folder "input": V tem imeniku morajo biti shranjeni vsi videoposnetki, ki jih želite izboljšati.
+  - Folder "output": V tem imeniku bodo shranjeni urejeni videoposnetki.
+  - Folder "fonts": Ta imenik naj vsebuje prilagojeno pisavo za besedilne elemente.
+  - Folder "photos": Ta imenik naj vsebuje slike ali logotipe, ki se bodo uporabili v videoposnetkih.
 
 1. **`title_duration`**:
-   - Začne z določitvijo trajanja za naslovna in končna platna, ki je nastavljeno na 5 sekund. To trajanje se lahko prilagodi po potrebi.
+   - Začne z določitvijo trajanja za začetno in končno platno, ki je nastavljeno na 5 sekund. To trajanje se lahko prilagodi po potrebi.
 
 2. **Naloži video**:
    - Vhodni video se naloži s pomočjo funkcije `VideoFileClip` iz knjižnice MoviePy. S tem je video pripravljen za nadaljnje urejanje.
 
-3. **Besedilni elementi**:
+3. **Text Elements**:
    - Ustvarjeni so različni besedilni elementi, ki se prekrijejo na videu:
      - `theme`: Naslov videoposnetka, prikazan na začetku.
      - `duration_txt`: Besedilo, ki označuje trajanje videoposnetka.
@@ -41,16 +41,16 @@ Ta funkcija je odgovorna za izboljšanje posameznega video posnetka. Prejme več
      - `next_video`: Naslov naslednjega videoposnetka, ki se prikaže na koncu.
      - `end_title`: Sporočilo, prikazano ob zaključku, npr. "Hvala za ogled!"
 
-4. **Pisava in slog**:
+4. **Font in style**:
    - Koda določi prilagojeno pisavo (`custom_font`) in določi velikost pisave, barvo in položaj za vsak besedilni element. Te lastnosti se lahko prilagodijo glede na slog vašega videoposnetka.
 
-5. **Besedilni posnetki**:
+5. **Text Clips**:
    - Besedilni posnetki se ustvarijo za vsak besedilni element s pomočjo funkcije `TextClip` iz MoviePy. Vsak besedilni posnetek je nastavljen na določeno trajanje in postavljen na želeno mesto v videu.
 
-6. **Barvni posnetki**:
-   - Ustvarita se dva barvna posnetka: `color_clip` z belo podlago za naslovna platna in `red_lane` z rdečo podlago za poudarjanje določenih delov videa. Oba imata enako trajanje kot naslovna platna.
+6. **Color Clips**:
+   - Ustvarita se dva barvna posnetka: `color_clip` z belo podlago za naslovna platna in `red_lane` z rdečo podlago. Oba imata enako trajanje kot naslovna platna.
 
-7. **Slikovni posnetki**:
+7. **Image Clip**:
    - Dva slikovna posnetka (`fri_logo_clip` in `lea_logo_clip`) se ustvarita iz slikovnih datotek. V zagotovljenem primeru gre za logotipa. Slike se prilagodijo in postavijo znotraj videa. Slikovne datoteke logotipov se lahko prilagodijo glede na vaše potrebe.
 
 8. **Prekrivanje besedila, barv in slik**:
@@ -67,7 +67,7 @@ Ta funkcija je odgovorna za izboljšanje posameznega video posnetka. Prejme več
 Ta funkcija avtomatizira postopek izboljšave videoposnetkov za več videoposnetkov na podlagi JSON konfiguracijske datoteke.
 
 1. **Nalaganje konfiguracije**:
-   - Začne z branjem JSON konfiguracijske datoteke, odstrani morebitne komentarje in jo analizira s pomočjo vgrajene knjižnice json v Pythonu. Konfiguracija mora vsebovati podrobnosti za vsak videoposnetek, ki ga želite izboljšati.
+   - Začne z branjem JSON konfiguracijske datoteke, odstrani morebitne komentarje in jo analizira s pomočjo vgrajene knjižnice json v Pythonu. Konfiguracija mora vsebovati podrobnosti za vsak videoposnetek, ki ga želite izboljšati. Pogledaj spica.json!
 
 2. **Zanka za videoposnetke**:
    - Funkcija zanka preide skozi vsak videoposnetek v določeni mapi. Za vsak videoposnetek preveri, ali ima povezan konfiguracijski element v JSON datoteki.
