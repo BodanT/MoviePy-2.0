@@ -11,6 +11,8 @@ Za tiste, ki uporabljate Windows, je uporaba te skripte precej enostavna. V izda
 Če uporabljate Linux ali MacOS, boste morali MoviePy namestiti ročno. Navodila za namestitev najdete tukaj:
 https://zulko.github.io/moviepy/install.html 
 
+## Začetna in končna špica
+
 ### Funkcija "add_title_and_end_screen":
 
 Ta funkcija je odgovorna za izboljšanje posameznega video posnetka. Prejme več parametrov, vključno s potjo do video posnetka, naslovi, podnaslovi in potjo za izhodno datoteko urejenega video posnetka.
@@ -22,9 +24,6 @@ Ta funkcija je odgovorna za izboljšanje posameznega video posnetka. Prejme več
   - Imenik "output": V tem imeniku bodo shranjeni urejeni videoposnetki.
   - Imenik "fonts": Ta imenik naj vsebuje prilagojeno pisavo za besedilne elemente.
   - Imenik "photos": Ta imenik naj vsebuje slike ali logotipe, ki se bodo uporabili v videoposnetkih.
-
-
-## Začetna in končna špica
 
 1. **`title_duration`**:
    - Začne z določitvijo trajanja za naslovna in končna platna, ki je nastavljeno na 5 sekund. To trajanje se lahko prilagodi po potrebi.
