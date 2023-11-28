@@ -100,8 +100,5 @@ Funkcija hide_people skrije ljudi v videoposnetku na podlagi navedene pozicije.
 
 2. **Delovanje**
    - Naloži vhodni videoposnetek in skrije ljudi tako, da prekrije z zastavo.
-<<<<<<< HEAD
    - Shrani spremenjeni videoposnetek na navedeno izhodno pot.
-=======
-   - Shrani spremenjeni videoposnetek na navedeno izhodno pot.
->>>>>>> d0e3b82059b0a5ab937a292c4ffca462bcc99d0b
+ 
