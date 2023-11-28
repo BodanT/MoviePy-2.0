@@ -11,6 +11,14 @@ Za tiste, ki uporabljate Windows, je uporaba te skripte precej enostavna. V izda
 Če uporabljate Linux ali MacOS, boste morali MoviePy namestiti ročno. Navodila za namestitev najdete tukaj:
 https://zulko.github.io/moviepy/install.html 
 
+### Izvananje skripte
+```
+python posnetek.py -c pot/do/konfiguracija.json -i pot/do/vhoda -o pot/do/izhoda
+```
+- Zamenjajte pot/do/konfiguracija.json z dejansko potjo do vaše JSON konfiguracijske datoteke.
+- Zamenjajte pot/do/vhoda s potjo do mape, ki vsebuje vhodne videoposnetke.
+- Zamenjajte pot/do/izhoda s potjo, kjer želite shraniti urejene videoposnetke.
+
 ## Začetna in končna špica
 
 ### Funkcija "add_title_and_end_screen":
@@ -75,6 +83,21 @@ Ta funkcija avtomatizira postopek izboljšave videoposnetkov za več videoposnet
 3. **Obravnavanje videoposnetkov**:
    - Če najde konfiguracijski element, skript kliče `add_title_and_end_screen`, da izboljša videoposnetek z navedenimi podrobnostmi, vključno z naslovom videoposnetka, podnaslovom in drugimi informacijami.
 
-4. **Videoposnetek ni najden**:
+4. **Skrivanje udeležencev**
+   - Če v spica.json je postavljen element `place` na bottom ali right, to pomeni da v posnetku so vidni udeleženci in jih mora skriti. Skripa kliče `hide_people`. 
+
+5. **Videoposnetek ni najden**:
    - Če videoposnetek nima povezanega konfiguracijskega elementa, skript izpiše sporočilo, ki označuje, da videoposnetka ni
 
+### Funkcija "hide_people":
+
+Funkcija hide_people skrije ljudi v videoposnetku na podlagi navedene pozicije.
+
+1. **Parametri:**
+  - video_path (str): Pot do vhodne videodatoteke.
+  - output_path (str): Pot do izhodne videodatoteke.
+  - position (str): Pozicija, kjer se postavi skrivalni trak. Če je "None", skrivanje ni izvedeno.
+
+2. **Delovanje**
+   - Naloži vhodni videoposnetek in skrije ljudi tako, da prekrije z zastavo.
+   - Shrani spremenjeni videoposnetek na navedeno izhodno pot.
