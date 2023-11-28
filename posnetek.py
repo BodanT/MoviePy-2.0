@@ -67,7 +67,7 @@ def add_title_and_end_screen(video_path, title_of_video, title_of_next_video, su
 
     # Create a text clip with the title for the beginning of the video
     theme_clip=TextClip(theme, fontsize=70, color='black', font=custom_font).set_duration(title_duration).set_position(('center')).set_start(0)
-    subtitle_clip=TextClip(subtitle, fontsize=35, color='black', font=custom_font).set_duration(title_duration).set_position(('center', 420)).set_start(0)
+    subtitle_clip=TextClip(subtitle, fontsize=35, color='black', font=custom_font).set_duration(title_duration).set_position(('center', video_clip.h/2+50)).set_start(0)
     professor_clip=TextClip(duration_txt, fontsize=35, color='black', font=custom_font).set_duration(title_duration).set_position((5, video_clip.size[1]-85)).set_start(0)
     duration_clip=TextClip(duration_str, fontsize=35, color='black', font=custom_font).set_duration(title_duration).set_position((10, video_clip.size[1]-50)).set_start(0)
     lea_clip=TextClip(lea, fontsize=50, color='white', font=custom_font).set_duration(title_duration).set_position(('center', 30)).set_start(0)
@@ -122,15 +122,26 @@ def edit_all_videos(folder_path, output_path, config_path):
         title_of_video = element.get("title_of_video", "")
         title_of_next_video = element.get("title_of_next_video", "")
         subtitle= element.get("subtitle", "")
+        place=element.get("place", "")
 
-        #Create the paths to the input and output videos
+        #Create the paths to the input and output videos and temp video
         video_path = os.path.join(folder_path, f"{video_name}.mp4")
-        output_video_path = os.path.join(output_path, f"edited_{video_name}.mp4")
+        output_video_path = os.path.join(output_path, f"{video_name}_edited.mp4")
+        temp_video_path = os.path.join(output_path, f"{video_name}_temp.mp4")
 
         #Check if the video exists and edit it
         if os.path.exists(video_path):
             print(f"Editing video: {video_name}")
-            add_title_and_end_screen(video_path, title_of_video, title_of_next_video, subtitle, output_video_path)
+            if(place=="None"):
+                #add title and end screen
+                add_title_and_end_screen(video_path, title_of_video, title_of_next_video, subtitle, output_video_path)
+            else:
+                # make temporaty video with the title screen and end screen
+                add_title_and_end_screen(video_path, title_of_video, title_of_next_video, subtitle, temp_video_path)
+                # hide all the people in the video
+                hide_people(temp_video_path, output_video_path, place)
+                # remove the temporary video
+                os.remove(temp_video_path)
             print(f"Done editing video: {video_name}")
         else:
             print(f"Video not found: {video_name}")
@@ -138,16 +149,41 @@ def edit_all_videos(folder_path, output_path, config_path):
 
 
 
+def hide_people(video_path, output_path, position):
+
+    video = VideoFileClip(video_path)
+    k = video.duration-5
+    # txt_clip = TextClip("Your text here", fontsize=30, color='red')
+    # txt_clip = txt_clip.set_position("bottom").set_duration(5)
+
+    if position != "None":
+        banner = ImageClip("photos/"+ position + ".jpg").set_position(position, position).set_duration(k).set_start(5)
+        final = CompositeVideoClip([video, banner])
+        final.write_videofile(output_path, codec="libx264")
+
+    VideoFileClip(video_path).close()
+    # else:
+    #     final = CompositeVideoClip([video, txt_clip])
+
+
+
+
+
+
+
 def main():
 
 
-    edit_all_videos("input", "output", "spica.json")
+    # edit_all_videos("input", "output", "spica.json")
 
-    # parser = argparse.ArgumentParser(description='Add text to a video using MoviePy')
-    # parser.add_argument('-c', '--config', required=True, help='Path to the JSON configuration file')
-    # parser.add_argument('-i', '--input', required=True, help='Path to the input video file')
-    # parser.add_argument('-o', '--output', required=True, help='Path to the output video file')
-    # args = parser.parse_args()
+
+    parser = argparse.ArgumentParser(description='Add text to a video using MoviePy')
+    parser.add_argument('-c', '--config', required=True, help='Path to the JSON configuration file')
+    parser.add_argument('-i', '--input', required=True, help='Path to the input video file')
+    parser.add_argument('-o', '--output', required=True, help='Path to the output video file')
+    args = parser.parse_args()
+
+    edit_all_videos(args.input, args.output, args.config)
 
     # # Read the JSON configuration file and remove comments
     # with open(args.config, 'r') as config_file:
