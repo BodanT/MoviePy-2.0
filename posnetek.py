@@ -123,6 +123,7 @@ def edit_all_videos(folder_path, output_path, config_path):
         title_of_next_video = element.get("title_of_next_video", "")
         subtitle= element.get("subtitle", "")
         place=element.get("place", "")
+        cut=element.get("cut", "")
 
         #Create the paths to the input and output videos and temp video
         video_path = os.path.join(folder_path, f"{video_name}.mp4")
@@ -136,10 +137,11 @@ def edit_all_videos(folder_path, output_path, config_path):
                 #add title and end screen
                 add_title_and_end_screen(video_path, title_of_video, title_of_next_video, subtitle, output_video_path)
             else:
-                # make temporaty video with the title screen and end screen
-                add_title_and_end_screen(video_path, title_of_video, title_of_next_video, subtitle, temp_video_path)
                 # hide all the people in the video
-                hide_people(temp_video_path, output_video_path, place)
+                hide_people(video_path, temp_video_path, place, cut)
+                # make temporaty video with the title screen and end screen
+                add_title_and_end_screen(temp_video_path, title_of_video, title_of_next_video, subtitle, output_video_path)
+
                 # remove the temporary video
                 os.remove(temp_video_path)
             print(f"Done editing video: {video_name}")
@@ -149,26 +151,23 @@ def edit_all_videos(folder_path, output_path, config_path):
 
 
 
-def hide_people(video_path, output_path, position):
+def hide_people(video_path, output_path, position, start_time):
 
     video = VideoFileClip(video_path)
-    k = video.duration-5
-    # txt_clip = TextClip("Your text here", fontsize=30, color='red')
-    # txt_clip = txt_clip.set_position("bottom").set_duration(5)
+    k = video.duration
 
-    if position != "None":
-        banner = ImageClip("photos/"+ position + ".jpg").set_position(position, position).set_duration(k).set_start(5)
+    if start_time != 0:
+        cut_video = CompositeVideoClip([video.subclip(start_time, k)])
+        k=cut_video.duration
+        banner = ImageClip("photos/"+ position + ".jpg").set_position(position, position).set_duration(k).set_start(0)
+        final = CompositeVideoClip([cut_video, banner])
+        final.write_videofile(output_path, codec="libx264")
+    else:
+        banner = ImageClip("photos/" + position + ".jpg").set_position(position, position).set_duration(k).set_start(0)
         final = CompositeVideoClip([video, banner])
         final.write_videofile(output_path, codec="libx264")
 
     VideoFileClip(video_path).close()
-    # else:
-    #     final = CompositeVideoClip([video, txt_clip])
-
-
-
-
-
 
 
 def main():
@@ -185,16 +184,6 @@ def main():
 
     edit_all_videos(args.input, args.output, args.config)
 
-    # # Read the JSON configuration file and remove comments
-    # with open(args.config, 'r') as config_file:
-    #     config_text = remove_comments(config_file.read())
-    #     config = json.loads(config_text)
-    #     text_elements = config.get("text_elements", [])
-
-
-
-    # add_text_to_video(args.input, text_elements, args.output)
-    # add_title_and_end_screen("input/input.mp4", "Video 1", "Video 2",  "output/out1.mp4")
     
     
 

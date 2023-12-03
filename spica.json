@@ -1,144 +1,164 @@
 {
   "spica": [
     {
-      "video_name": "input111",
+      "video_name": "input",
       "title_of_video": "Spica",
       "subtitle": "The brightest star in the constellation Virgo",
       "title_of_next_video": "Spica Part 2",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "input2ww",
       "title_of_video": "Spica_2",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "Spica Part 3",
-      "place": "right"
+      "place": "right",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 01.1 Von Neumannov model",
       "title_of_video": "Von Neumannov model",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 01.2 Pomnilnik",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 01.2 Pomnilnik",
       "title_of_video": "Pomnilnik",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 01.3 Stevilski sistemi na hitro",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 01.3 Stevilski sistemi na hitro",
       "title_of_video": "Stevilski sistemi",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 01.4 Pravili debelega in tankega konca",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 01.4 Pravili debelega in tankega konca",
       "title_of_video": "Pravili debelega in tankega konca",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 01.5 Primeri izracunov vsote dveh stevil",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 01.5 Primeri izracunov vsote dveh stevil",
       "title_of_video": "Primeri izracunov vsote dveh stevil",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 01.6 Primer Vsote - CPULator",
-      "place": "None"
+      "place": "None",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 01.6 Primer Vsote - CPULator",
       "title_of_video": "Primer Vsote - CPULator",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 01.7 Cpulator_predstavitev",
-      "place": "None"
+      "place": "None",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 01.7 Cpulator_predstavitev",
       "title_of_video": "Cpulator_predstavitev",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 02.1 Mikrokrmilnik ARM",
-      "place": "None"
+      "place": "None",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 02.1 Mikrokrmilnik ARM",
       "title_of_video": "Mikrokrmilnik ARM",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 02.2 Osnove zbirnika",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 3
     },
     {
       "video_name": "RA LAB 02.2 Osnove zbirnika",
       "title_of_video": "Osnove zbirnika",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 02.3 Psevdo ukazi in direktive",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 02.3 Psevdo ukazi in direktive",
       "title_of_video": "Psevdo ukazi in direktive",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 02.4 Primer uporabe direktiv",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 02.4 Primer uporabe direktiv",
       "title_of_video": "Primer uporabe direktiv",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 02.5 Uporaba direktiv - Naloga",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 02.5 Uporaba direktiv - Naloga",
       "title_of_video": "Uporaba direktiv - Naloga",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 02.5a Uporaba direktiv - Naloga - resitev razlaga",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 02.5a Uporaba direktiv - Naloga - resitev razlaga",
       "title_of_video": "Uporaba direktiv - Naloga - resitev razlaga",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 02.5b Uporaba direktiv - Naloga - CPULator resitev",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 13
     },
     {
       "video_name": "RA LAB 02.5b Uporaba direktiv - Naloga - CPULator resitev",
       "title_of_video": "Uporaba direktiv - Naloga - CPULator resitev",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 03.1 Tema_Nacini naslavljanja",
-      "place": "None"
+      "place": "None",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 03.1 Tema_Nacini naslavljanja",
       "title_of_video": "Nacini naslavljanja",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 03.2 Naloga 3.1 Winidea",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 03.2 Naloga 3.1 Winidea",
       "title_of_video": "Naloga 3.1 Winidea",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 03.3 Naloga 3.2 Winidea",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 03.3 Naloga 3.2 Winidea",
       "title_of_video": "Naloga 3.2 Winidea",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "RA LAB 03.4 Naloga 3.3",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     },
     {
       "video_name": "RA LAB 03.4 Naloga 3.3",
       "title_of_video": "Naloga 3.3",
       "subtitle": "IDK what to put here",
       "title_of_next_video": "Konec tega dela",
-      "place": "bottom"
+      "place": "bottom",
+      "cut": 0
     }
   ]
 }
