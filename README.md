@@ -21,7 +21,7 @@ python posnetek.py -c pot/do/konfiguracija.json -i pot/do/vhoda -o pot/do/izhoda
 
 ## Začetna in končna špica
 
-### Funkcija "add_title_and_end_screen":
+### Funkcija `add_title_and_end_screen`:
 
 Ta funkcija je odgovorna za izboljšanje posameznega video posnetka. Prejme več parametrov, vključno s potjo do video posnetka, naslovi, podnaslovi in potjo za izhodno datoteko urejenega video posnetka.
 
@@ -70,7 +70,7 @@ Ta funkcija je odgovorna za izboljšanje posameznega video posnetka. Prejme več
 10. **Shranjevanje videoposnetka**:
     - Izboljšan videoposnetek se shrani v določeno izhodno pot s pomočjo metode `write_videofile` s kodekom, nastavljenim na 'libx264'.
 
-### Funkcija "edit_all_videos":
+### Funkcija `edit_all_videos`:
 
 Ta funkcija avtomatizira postopek izboljšave videoposnetkov za več videoposnetkov na podlagi JSON konfiguracijske datoteke.
 
@@ -90,27 +90,9 @@ Ta funkcija avtomatizira postopek izboljšave videoposnetkov za več videoposnet
 5. **Videoposnetek ni najden**:
    - Če videoposnetek nima povezanega konfiguracijskega elementa, skript izpiše sporočilo, ki označuje, da videoposnetka ni
 
-### Funkcija "hide_people":
+## Funkcija `hide_people`
 
 Funkcija hide_people skrije ljudi v videoposnetku na podlagi navedene pozicije.
-
-## Funkcija `edit_all_videos`
-
-Ta funkcija avtomatizira postopek izboljšave videoposnetkov za več videoposnetkov na podlagi JSON konfiguracijske datoteke.
-
-1. **Nalaganje konfiguracije**:
-   - Začne z branjem JSON konfiguracijske datoteke, odstrani morebitne komentarje in jo analizira s pomočjo vgrajene knjižnice json v Pythonu. Konfiguracija mora vsebovati podrobnosti za vsak videoposnetek, ki ga želite izboljšati. Pogledaj `spica.json`!
-
-2. **Zanka za videoposnetke**:
-   - Funkcija zanka preide skozi vsak videoposnetek v določeni mapi. Za vsak videoposnetek preveri, ali ima povezan konfiguracijski element v JSON datoteki.
-
-3. **Obravnavanje videoposnetkov**:
-   - Če najde konfiguracijski element, skript kliče `add_title_and_end_screen`, da izboljša videoposnetek z navedenimi podrobnostmi, vključno z naslovom videoposnetka, podnaslovom in drugimi informacijami.
-
-4. **Videoposnetek ni najden**:
-   - Če videoposnetek nima povezanega konfiguracijskega elementa, skript izpiše sporočilo, ki označuje, da videoposnetka ni.
-
-## Funkcija `hide_people`
 
 1. **Parametri:**
    - `video_path` (str): Pot do vhodne videodatoteke.
