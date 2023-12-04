@@ -84,7 +84,8 @@ Ta funkcija avtomatizira postopek izboljšave videoposnetkov za več videoposnet
    - Če najde konfiguracijski element, skript kliče `add_title_and_end_screen`, da izboljša videoposnetek z navedenimi podrobnostmi, vključno z naslovom videoposnetka, podnaslovom in drugimi informacijami.
 
 4. **Skrivanje udeležencev**
-   - Če v spica.json je postavljen element `place` na bottom ali right, to pomeni da v posnetku so vidni udeleženci in jih mora skriti. Skripa kliče `hide_people`. 
+   - Če v spica.json je postavljen element `place` na bottom ali right, to pomeni da v posnetku so vidni udeleženci in jih mora skriti. Skripa kliče `hide_people`.
+   - V funkciji hide_people se prav tako nahaja parameter "cut". Ta parameter običajno prevzame vrednost 0 v .json datoteki, razen če so udeleženci vidni na celotnem zaslonu že na začetku posnetka. V takem primeru se ta parameter uporablja za odložitev začetka videoposnetka, kar omogoča, da se udeleženci odstranijo od začetka.
 
 5. **Videoposnetek ni najden**:
    - Če videoposnetek nima povezanega konfiguracijskega elementa, skript izpiše sporočilo, ki označuje, da videoposnetka ni
@@ -93,12 +94,38 @@ Ta funkcija avtomatizira postopek izboljšave videoposnetkov za več videoposnet
 
 Funkcija hide_people skrije ljudi v videoposnetku na podlagi navedene pozicije.
 
-1. **Parametri:**
-  - video_path (str): Pot do vhodne videodatoteke.
-  - output_path (str): Pot do izhodne videodatoteke.
-  - position (str): Pozicija, kjer se postavi skrivalni trak. Če je "None", skrivanje ni izvedeno.
+## Funkcija `edit_all_videos`
 
-2. **Delovanje**
-   - Naloži vhodni videoposnetek in skrije ljudi tako, da prekrije z zastavo.
+Ta funkcija avtomatizira postopek izboljšave videoposnetkov za več videoposnetkov na podlagi JSON konfiguracijske datoteke.
+
+1. **Nalaganje konfiguracije**:
+   - Začne z branjem JSON konfiguracijske datoteke, odstrani morebitne komentarje in jo analizira s pomočjo vgrajene knjižnice json v Pythonu. Konfiguracija mora vsebovati podrobnosti za vsak videoposnetek, ki ga želite izboljšati. Pogledaj `spica.json`!
+
+2. **Zanka za videoposnetke**:
+   - Funkcija zanka preide skozi vsak videoposnetek v določeni mapi. Za vsak videoposnetek preveri, ali ima povezan konfiguracijski element v JSON datoteki.
+
+3. **Obravnavanje videoposnetkov**:
+   - Če najde konfiguracijski element, skript kliče `add_title_and_end_screen`, da izboljša videoposnetek z navedenimi podrobnostmi, vključno z naslovom videoposnetka, podnaslovom in drugimi informacijami.
+
+4. **Videoposnetek ni najden**:
+   - Če videoposnetek nima povezanega konfiguracijskega elementa, skript izpiše sporočilo, ki označuje, da videoposnetka ni.
+
+## Funkcija `hide_people`
+
+1. **Parametri:**
+   - `video_path` (str): Pot do vhodne videodatoteke.
+   - `output_path` (str): Pot do izhodne videodatoteke.
+   - `position` (str): Pozicija, kjer se postavi skrivalni trak. Če je "None", skrivanje ni izvedeno.
+   - `start_time` (int): Parameter se uporablja za odložitev začetka videoposnetka, kar omogoča, da se udeleženci odstranijo že od začetka.
+
+2. **Delovanje:**
+   - Naloži vhodni videoposnetek in skrije ljudi s prekrivanjem z zastavo.
+   - Če je `start_time` večji od 0, se začetek posnetka odloži za določen čas.
    - Shrani spremenjeni videoposnetek na navedeno izhodno pot.
+
+## Glavna funkcija `main`
+
+Ta funkcija je odgovorna za zagon skripte z ukazi iz ukazne vrstice. Sprejema argumente, ki določajo pot do konfiguracijske datoteke (`-c`), vhodnega videa (`-i`) in izhodnega videa (`-o`).
+
+
  
